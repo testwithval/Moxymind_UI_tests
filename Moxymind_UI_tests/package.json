@@ -1,0 +1,27 @@
+{
+  "name": "moxymind-ui-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright + TypeScript UI tests for https://www.saucedemo.com/ (Moxymind technical task)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "saucedemo",
+    "e2e"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.13.0",
+    "typescript": "^5.9.2"
+  }
+}
