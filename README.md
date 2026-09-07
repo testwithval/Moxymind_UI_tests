@@ -6,6 +6,8 @@ This repo covers the main shop journey: **login**, **blocked account**, **add to
 
 It also covers the Moxymind API task: **GET — List Users** and **POST — Create a User**.
 
+The suite contains **7 automated tests**: 4 UI tests and 3 API tests.
+
 ## Test cases
 
 | # | What it checks | Why this is essential |
@@ -27,8 +29,8 @@ Specs live in `tests/ui/` and `tests/api/` and repeat the “why essential” ra
 ## Run locally
 
 ```bash
-git clone https://github.com/testwithval/Moxymind_UI_tests.git
-cd Moxymind_UI_tests
+git clone https://github.com/testwithval/Moxymind_tests.git
+cd Moxymind_tests
 npm install
 npm test
 ```
@@ -44,6 +46,7 @@ That is the command-line demo: all UI and API tests. UI tests run in visible Goo
 | `npx playwright test tests/ui` | Run only the UI tests |
 | `npx playwright test tests/api` | Run only the ReqRes API tests |
 | `npx playwright test tests/ui/01-login.spec.ts` | Run one UI file |
+| `npx playwright test tests/api/04-api.spec.ts` | Run one API file |
 | `npx playwright test --ui` | Playwright UI mode |
 | `npx playwright show-report` | Open the last HTML report |
 | `npm run typecheck` | TypeScript check only |
@@ -55,7 +58,7 @@ HTML report is written to `playwright-report/` after each run.
 | Scenario | Assertions |
 |----------|------------|
 | `GET /api/users?page=1&per_page=12` | Status `200`, `total`, first two `last_name` values, `data.length === total`, and response data types |
-| `POST /api/users` | Data-driven requests, status `201`, response time limit, echoed `name` and `job`, plus generated `id` and `createdAt` |
+| `POST /api/users` | Data-driven requests from `src/data/api-test-data.ts`, status `201`, response time under the configured `10,000 ms` limit, echoed `name` and `job`, plus generated `id` and `createdAt` |
 
 ## Demo credentials
 
