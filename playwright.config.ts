@@ -14,17 +14,23 @@ export default defineConfig({
     : [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'https://www.saucedemo.com',
+    headless: !!process.env.CI,
     // Sauce Demo exposes stable data-test attributes (not data-testid).
     testIdAttribute: 'data-test',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    // Video needs Playwright's ffmpeg download; disabled while CDN installs time out.
+    video: 'off',
     trace: 'on-first-retry',
     actionTimeout: 10_000,
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        // Use installed Chrome while Playwright's Chromium download times out.
+        channel: 'chrome',
+      },
     },
   ],
 });

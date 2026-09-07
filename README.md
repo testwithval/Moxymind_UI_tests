@@ -19,6 +19,7 @@ Specs live in `tests/` and repeat the “why essential” rationale above each t
 
 - Node.js **22** (or 20+)
 - npm
+- Google Chrome installed locally
 - Network access to `https://www.saucedemo.com/`
 
 ## Run locally
@@ -27,17 +28,16 @@ Specs live in `tests/` and repeat the “why essential” rationale above each t
 git clone https://github.com/testwithval/Moxymind_UI_tests.git
 cd Moxymind_UI_tests
 npm install
-npx playwright install chromium
 npm test
 ```
 
-That is the command-line demo: four tests on Chromium, headless.
+That is the command-line demo: four tests on Google Chrome with the browser visible locally. CI runs the same suite headless.
 
 ### Other useful commands
 
 | Command | What it does |
 |---------|----------------|
-| `npm test` | Run the suite (headless Chromium) |
+| `npm test` | Run the suite with visible Google Chrome locally |
 | `npx playwright test --headed` | Watch the browser |
 | `npx playwright test tests/01-login.spec.ts` | Run one file |
 | `npx playwright test --ui` | Playwright UI mode |
