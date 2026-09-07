@@ -1,5 +1,5 @@
-import { test, expect } from '../src/fixtures/saucedemo';
-import { copy, users } from '../src/data/test-data';
+import { test, expect } from '../../src/fixtures/saucedemo';
+import { copy, users } from '../../src/data/test-data';
 
 /**
  * TC1 — Successful login

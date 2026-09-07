@@ -1,5 +1,5 @@
-import { test } from '../src/fixtures/saucedemo';
-import { checkoutInfo, copy, products, users } from '../src/data/test-data';
+import { test } from '../../src/fixtures/saucedemo';
+import { checkoutInfo, copy, products, users } from '../../src/data/test-data';
 
 /**
  * TC4 — Complete checkout

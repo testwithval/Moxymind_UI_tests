@@ -1,8 +1,10 @@
-# Moxymind UI tests — Sauce Demo
+# Moxymind tests — Sauce Demo and ReqRes
 
-Playwright + TypeScript UI tests for [Sauce Demo](https://www.saucedemo.com/) (Swag Labs).
+Playwright + TypeScript automation for [Sauce Demo](https://www.saucedemo.com/) UI flows and the [ReqRes](https://reqres.in/) REST API.
 
 This repo covers the main shop journey: **login**, **blocked account**, **add to cart**, and **checkout**.
+
+It also covers the Moxymind API task: **GET — List Users** and **POST — Create a User**.
 
 ## Test cases
 
@@ -13,7 +15,7 @@ This repo covers the main shop journey: **login**, **blocked account**, **add to
 | **TC3** | Adding a backpack updates the cart badge **and** the cart page | Add-to-cart is the core shopping action. Badge and cart contents must match, or customers lose trust and may pay for the wrong items. |
 | **TC4** | Full checkout: cart → details → overview → confirmation | Checkout is the revenue path. If any step drops the item or fails to confirm, the shop cannot complete a purchase. |
 
-Specs live in `tests/` and repeat the “why essential” rationale above each test.
+Specs live in `tests/ui/` and `tests/api/` and repeat the “why essential” rationale above each test.
 
 ## Prerequisites
 
@@ -31,7 +33,7 @@ npm install
 npm test
 ```
 
-That is the command-line demo: four tests on Google Chrome with the browser visible locally. CI runs the same suite headless.
+That is the command-line demo: all UI and API tests. UI tests run in visible Google Chrome locally; API tests run without a browser. CI runs the suite headless.
 
 ### Other useful commands
 
@@ -39,12 +41,21 @@ That is the command-line demo: four tests on Google Chrome with the browser visi
 |---------|----------------|
 | `npm test` | Run the suite with visible Google Chrome locally |
 | `npx playwright test --headed` | Watch the browser |
-| `npx playwright test tests/01-login.spec.ts` | Run one file |
+| `npx playwright test tests/ui` | Run only the UI tests |
+| `npx playwright test tests/api` | Run only the ReqRes API tests |
+| `npx playwright test tests/ui/01-login.spec.ts` | Run one UI file |
 | `npx playwright test --ui` | Playwright UI mode |
 | `npx playwright show-report` | Open the last HTML report |
 | `npm run typecheck` | TypeScript check only |
 
 HTML report is written to `playwright-report/` after each run.
+
+## API scenarios
+
+| Scenario | Assertions |
+|----------|------------|
+| `GET /api/users?page=1&per_page=12` | Status `200`, `total`, first two `last_name` values, `data.length === total`, and response data types |
+| `POST /api/users` | Data-driven requests, status `201`, response time limit, echoed `name` and `job`, plus generated `id` and `createdAt` |
 
 ## Demo credentials
 
@@ -61,6 +72,7 @@ These are **public** Sauce Labs demo accounts (also listed on the login page). T
 ├── playwright.config.ts      # baseURL, data-test locators, Chromium
 ├── src/
 │   ├── data/test-data.ts     # users, product, checkout details
+│   ├── data/api-test-data.ts  # data-driven API payloads and response-time limit
 │   ├── fixtures/saucedemo.ts # page-object fixtures
 │   └── pages/                # Page Object Model
 │       ├── login.page.ts
@@ -68,9 +80,12 @@ These are **public** Sauce Labs demo accounts (also listed on the login page). T
 │       ├── cart.page.ts
 │       └── checkout.page.ts
 └── tests/
-    ├── 01-login.spec.ts      # TC1 + TC2
-    ├── 02-cart.spec.ts       # TC3
-    └── 03-checkout.spec.ts   # TC4
+    ├── ui/
+    │   ├── 01-login.spec.ts      # TC1 + TC2
+    │   ├── 02-cart.spec.ts       # TC3
+    │   └── 03-checkout.spec.ts   # TC4
+    └── api/
+        └── 04-api.spec.ts        # GET list users + POST create user
 ```
 
 Locators use Sauce Demo’s `data-test` attributes (`testIdAttribute: 'data-test'` in Playwright), not CSS class names.

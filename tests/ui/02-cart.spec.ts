@@ -1,5 +1,5 @@
-import { test } from '../src/fixtures/saucedemo';
-import { products, users } from '../src/data/test-data';
+import { test } from '../../src/fixtures/saucedemo';
+import { products, users } from '../../src/data/test-data';
 
 /**
  * TC3 — Add a product to the cart
