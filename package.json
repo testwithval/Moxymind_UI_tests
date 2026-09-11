@@ -9,6 +9,8 @@
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
+    "test:demo-fail": "set DEMO_FAIL=1&& playwright test tests/api/04-api.spec.ts -g \"DEMO:\"",
+    "test:api:full-log": "set LOG_FULL_RESPONSE=1&& playwright test tests/api",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
